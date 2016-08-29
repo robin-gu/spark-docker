@@ -1,5 +1,3 @@
-# hadoop part
-# https://github.com/bigdatafoundation/docker-hadoop/blob/master/2.6.0/Dockerfile
 FROM ubuntu:16.04
 
 ENV JAVA_HOME		/usr/lib/jvm/java-8-openjdk-amd64
@@ -71,3 +69,6 @@ EXPOSE 9000 50070 50010 50020 50075 50090
 
 
 CMD ["hdfs"]
+# hadoop part
+# https://github.com/bigdatafoundation/docker-hadoop/blob/master/2.6.0/Dockerfile
+

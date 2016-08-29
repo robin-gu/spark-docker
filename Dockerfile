@@ -5,8 +5,8 @@ ENV JAVA_HOME		/usr/lib/jvm/java-8-openjdk-amd64
 ARG APT_MIRROR=archive.ubuntu.com
 RUN sed -i s/archive.ubuntu.com/$APT_MIRROR/g /etc/apt/sources.list
 
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk && \
+RUN apt-get update -q && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -qy openjdk-8-jdk && \
     rm -rf /var/lib/apt/lists/*
 
 ####################
@@ -18,10 +18,10 @@ ENV HADOOP_HOME		/usr/local/hadoop
 ENV HADOOP_OPTS		-Djava.library.path=/usr/local/hadoop/lib/native
 ENV PATH		$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y wget libssl-dev && \
+RUN apt-get update -q && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -qy wget libssl-dev && \
     wget -q http://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
-    apt-get remove -y wget && \
+    apt-get remove -qy wget && \
     rm -rf /var/lib/apt/lists/* && \
     tar -zxf /hadoop-$HADOOP_VERSION.tar.gz && \
     rm /hadoop-$HADOOP_VERSION.tar.gz && \

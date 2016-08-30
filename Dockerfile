@@ -68,7 +68,26 @@ EXPOSE 9000 50070 50010 50020 50075 50090
 
 
 
-CMD ["hdfs"]
 # hadoop part
 # https://github.com/bigdatafoundation/docker-hadoop/blob/master/2.6.0/Dockerfile
 
+#spark
+
+ENV SPARK_VERSION	2.0.0
+ENV HADOOP_VERSION_SHORT    2.7
+ENV SPARK_HOME		/usr/local/spark
+#ENV SPARK_OPTS		-Djava.library.path=/usr/local/hadoop/lib/native
+ENV PATH		$PATH:$HADOOP_HOME/bin:$SPARK_HOME/sbin
+
+RUN apt-get update -q && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -qy wget libssl-dev && \
+    wget -q http://archive.apache.org/dist/spark/saprk-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
+    apt-get remove -qy wget && \
+    rm -rf /var/lib/apt/lists/* && \
+    tar -zxf /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
+    rm /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
+    mv spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT $SPARK_HOME && \
+    mkdir -p /usr/local/spark/logs
+
+
+CMD ["bash"]

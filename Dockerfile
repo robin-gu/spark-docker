@@ -51,7 +51,7 @@ ENV PATH		$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 RUN wget -q https://archive.apache.org/dist/spark/saprk-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
     tar -zxf /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
     rm /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
-    mv spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT /opt/local/spark && \
+    mv spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT /opt/spark && \
     mkdir -p /opt/spark/logs
 
 ####################

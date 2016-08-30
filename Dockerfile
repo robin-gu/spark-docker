@@ -20,9 +20,7 @@ ENV PATH		$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
 RUN apt-get update -q && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qy wget libssl-dev && \
-    wget -q http://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
-    apt-get remove -qy wget && \
-    rm -rf /var/lib/apt/lists/* && \
+    wget -q https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
     tar -zxf /hadoop-$HADOOP_VERSION.tar.gz && \
     rm /hadoop-$HADOOP_VERSION.tar.gz && \
     mv hadoop-$HADOOP_VERSION /usr/local/hadoop && \
@@ -79,11 +77,7 @@ ENV SPARK_HOME		/usr/local/spark
 #ENV SPARK_OPTS		-Djava.library.path=/usr/local/hadoop/lib/native
 ENV PATH		$PATH:$HADOOP_HOME/bin:$SPARK_HOME/sbin
 
-RUN apt-get update -q && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -qy wget libssl-dev && \
-    wget -q http://archive.apache.org/dist/spark/saprk-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
-    apt-get remove -qy wget && \
-    rm -rf /var/lib/apt/lists/* && \
+RUN wget -q https://archive.apache.org/dist/spark/saprk-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
     tar -zxf /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
     rm /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
     mv spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT $SPARK_HOME && \

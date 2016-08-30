@@ -14,8 +14,8 @@ RUN apt-get update -q && \
 ####################
 
 ENV HADOOP_VERSION	2.7.3
-ENV HADOOP_HOME		/usr/local/hadoop
-ENV HADOOP_OPTS		-Djava.library.path=/usr/local/hadoop/lib/native
+ENV HADOOP_HOME		/opt/local/hadoop
+ENV HADOOP_OPTS		-Djava.library.path=/opt/local/hadoop/lib/native
 ENV PATH		$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
 RUN apt-get update -q && \
@@ -23,8 +23,8 @@ RUN apt-get update -q && \
     wget -q https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
     tar -zxf /hadoop-$HADOOP_VERSION.tar.gz && \
     rm /hadoop-$HADOOP_VERSION.tar.gz && \
-    mv hadoop-$HADOOP_VERSION /usr/local/hadoop && \
-    mkdir -p /usr/local/hadoop/logs
+    mv hadoop-$HADOOP_VERSION /opt/local/hadoop && \
+    mkdir -p /opt/local/hadoop/logs
 
 # Overwrite default HADOOP configuration files with our config files
 COPY conf  $HADOOP_HOME/etc/hadoop/
@@ -36,9 +36,23 @@ VOLUME /data
 
 
 # Helper script for starting YARN
-ADD start-yarn.sh /usr/local/bin/start-yarn.sh
+ADD start-yarn.sh /opt/local/bin/start-yarn.sh
 
 
+
+
+#spark
+
+ENV SPARK_VERSION	2.0.0
+ENV HADOOP_VERSION_SHORT    2.7
+ENV SPARK_HOME		/opt/local/spark
+ENV PATH		$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
+RUN wget -q https://archive.apache.org/dist/spark/saprk-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
+    tar -zxf /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
+    rm /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
+    mv spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT /opt/local/spark && \
+    mkdir -p /opt/local/spark/logs
 
 ####################
 # PORTS
@@ -62,26 +76,6 @@ ADD start-yarn.sh /usr/local/bin/start-yarn.sh
 #	50475 = dfs.datanode.https.address	(HTTPS / Secure UI)
 # HDFS: Secondary NameNode (SNN)
 #	50090 = dfs.secondary.http.address	(HTTP / Checkpoint for NameNode metadata)
-EXPOSE 9000 50070 50010 50020 50075 50090
-
-
-
-# hadoop part
-# https://github.com/bigdatafoundation/docker-hadoop/blob/master/2.6.0/Dockerfile
-
-#spark
-
-ENV SPARK_VERSION	2.0.0
-ENV HADOOP_VERSION_SHORT    2.7
-ENV SPARK_HOME		/usr/local/spark
-#ENV SPARK_OPTS		-Djava.library.path=/usr/local/hadoop/lib/native
-ENV PATH		$PATH:$HADOOP_HOME/bin:$SPARK_HOME/sbin
-
-RUN wget -q https://archive.apache.org/dist/spark/saprk-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
-    tar -zxf /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
-    rm /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
-    mv spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT $SPARK_HOME && \
-    mkdir -p /usr/local/spark/logs
-
+EXPOSE 9000 8020 50070 50010 50020 50075 50090
 
 CMD ["bash"]

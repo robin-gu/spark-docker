@@ -48,7 +48,7 @@ ENV HADOOP_VERSION_SHORT    2.7
 ENV SPARK_HOME		/opt/spark
 ENV PATH		$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
-RUN wget -q https://archive.apache.org/dist/spark/saprk-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
+RUN wget -q https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
     tar -zxf /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
     rm /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
     mv spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT /opt/spark && \

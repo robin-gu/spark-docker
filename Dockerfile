@@ -26,6 +26,7 @@ RUN apk add --update --no-cache wget tar bash
 RUN wget -q https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz 
 RUN tar -zxf /hadoop-$HADOOP_VERSION.tar.gz 
 RUN rm /hadoop-$HADOOP_VERSION.tar.gz 
+RUN mkdir -p /opt
 RUN mv hadoop-$HADOOP_VERSION /opt/hadoop 
 RUN mkdir -p /opt/hadoop/logs
 

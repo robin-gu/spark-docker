@@ -20,7 +20,7 @@ ENV HADOOP_OPTS		-Djava.library.path=/opt/hadoop/lib/native
 ENV PATH		$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 #RUN apt-get update -q && \
 #    DEBIAN_FRONTEND=noninteractive apt-get install -qy wget libssl-dev && \
-RUN apk add --update --no-cache openssl ca-certificates && \
+RUN apk add --update --no-cache openssl ca-certificates bash && \
     update-ca-certificates && \
     wget -q https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
     tar -zxf /hadoop-$HADOOP_VERSION.tar.gz && \
@@ -33,9 +33,8 @@ RUN apk add --update --no-cache openssl ca-certificates && \
 COPY conf  $HADOOP_HOME/etc/hadoop/
 
 # Formatting HDFS
-RUN mkdir -p /data/dfs/data /data/dfs/name /data/dfs/namesecondary 
-RUN which hdfs
-RUN hdfs namenode -format
+RUN mkdir -p /data/dfs/data /data/dfs/name /data/dfs/namesecondary && \
+    hdfs namenode -format
 VOLUME /data
 
 

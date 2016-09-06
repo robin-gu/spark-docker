@@ -21,8 +21,9 @@ ENV PATH		$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
 #RUN apt-get update -q && \
 #    DEBIAN_FRONTEND=noninteractive apt-get install -qy wget libssl-dev && \
-RUN apk add --no-cache wget tar bash \
-    wget -q https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
+RUN apk add --update --no-cache bash python py-pip openssl ca-certificates
+RUN apk add --update --no-cache wget tar bash 
+RUN wget -q https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
     tar -zxf /hadoop-$HADOOP_VERSION.tar.gz && \
     rm /hadoop-$HADOOP_VERSION.tar.gz && \
     mv hadoop-$HADOOP_VERSION /opt/hadoop && \

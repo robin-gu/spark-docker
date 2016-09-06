@@ -46,17 +46,17 @@ ADD start-yarn.sh /usr/local/bin/start-yarn.sh
 
 #spark
 
-ENV SPARK_VERSION	2.0.0
-ENV HADOOP_VERSION_SHORT    2.7
-ENV SPARK_HOME		/opt/spark
-ENV PATH		$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+#ENV SPARK_VERSION	2.0.0
+#ENV HADOOP_VERSION_SHORT    2.7
+#ENV SPARK_HOME		/opt/spark
+#ENV PATH		$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
-RUN wget -q https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
-    tar -zxf /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
-    rm /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
-    mv spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT /opt/spark && \
-    mkdir -p /opt/spark/logs
-
+#RUN wget -q https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
+#    tar -zxf /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
+#    rm /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
+#    mv spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT /opt/spark && \
+#    mkdir -p /opt/spark/logs
+#
 ####################
 # PORTS
 ####################
@@ -81,4 +81,4 @@ RUN wget -q https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-$SP
 #	50090 = dfs.secondary.http.address	(HTTP / Checkpoint for NameNode metadata)
 EXPOSE 9000 8020 50070 50010 50020 50075 50090
 
-CMD ["bash"]
+CMD ["sh"]

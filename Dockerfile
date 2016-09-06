@@ -1,13 +1,14 @@
-FROM ubuntu:16.04
+#FROM ubuntu:16.04
+FROM openjdk:8-jdk-alpine
 
-ENV JAVA_HOME		/usr/lib/jvm/java-8-openjdk-amd64
+#ENV JAVA_HOME		/usr/lib/jvm/java-8-openjdk-amd64
 
-ARG APT_MIRROR=archive.ubuntu.com
-RUN sed -i s/archive.ubuntu.com/$APT_MIRROR/g /etc/apt/sources.list
+#ARG APT_MIRROR=archive.ubuntu.com
+#RUN sed -i s/archive.ubuntu.com/$APT_MIRROR/g /etc/apt/sources.list
 
-RUN apt-get update -q && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -qy openjdk-8-jdk && \
-    rm -rf /var/lib/apt/lists/*
+#RUN apt-get update -q && \
+#    DEBIAN_FRONTEND=noninteractive apt-get install -qy openjdk-8-jdk && \
+#    rm -rf /var/lib/apt/lists/*
 
 ####################
 # HADOOP
@@ -18,8 +19,9 @@ ENV HADOOP_HOME		/opt/hadoop
 ENV HADOOP_OPTS		-Djava.library.path=/opt/hadoop/lib/native
 ENV PATH		$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
-RUN apt-get update -q && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -qy wget libssl-dev && \
+#RUN apt-get update -q && \
+#    DEBIAN_FRONTEND=noninteractive apt-get install -qy wget libssl-dev && \
+RUN apk add --no-cache wget tar bash \
     wget -q https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
     tar -zxf /hadoop-$HADOOP_VERSION.tar.gz && \
     rm /hadoop-$HADOOP_VERSION.tar.gz && \

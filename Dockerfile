@@ -20,8 +20,9 @@ ENV HADOOP_OPTS		-Djava.library.path=/opt/hadoop/lib/native
 ENV PATH		$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 #RUN apt-get update -q && \
 #    DEBIAN_FRONTEND=noninteractive apt-get install -qy wget libssl-dev && \
-#RUN apk add --update --no-cache bash python py-pip openssl ca-certificates && \
-RUN wget -q https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
+RUN apk add --update --no-cache openssl ca-certificates && \
+    update-ca-certificates && \
+    wget -q https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
     tar -zxf /hadoop-$HADOOP_VERSION.tar.gz && \
     rm /hadoop-$HADOOP_VERSION.tar.gz && \
     mkdir -p /opt && \

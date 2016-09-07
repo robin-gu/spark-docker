@@ -2,14 +2,13 @@ spark-master:
     image: robingu/spark
     ports: 
         - "8080:8080"
-    command: start-master.sh 
+    command: start-master.sh && tail -f /opt/spark/logs/*.out
     hostname: spark-master
 
 spark-slave:
     image: robingu/spark
-    command: start-slave.sh 
+    command: start-slave.sh spark://127.0.0.1:7077 && tail -f /opt/spark/logs/*.out 
     #ports:
-    #    - "50075:50075"
     links:
         - spark-master:spark-master
 

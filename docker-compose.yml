@@ -1,25 +1,23 @@
-namenode:
-    image: marmot007/spark-docker
+spark-master:
+    image: robingu/spark-docker
     ports: 
-        - "50070:50070"
-        - "9000:9000"
-        - "8020:8020"
-    command: hdfs namenode
-    hostname: hdfs-namenode
+        - "8080:8080"
+    command: start-master.sh 
+    hostname: spark-master
 
-datanode:
-    image: marmot007/spark-docker
-    command: hdfs datanode
-    ports:
-# The host port is randomly assigned by Docker, to allow scaling to multiple DataNodes on the same host
-        - "50075:50075"
-    links:
-        - namenode:hdfs-namenode
-
-secondarynamenode:
-    image: marmot007/spark-docker
-    command: hdfs secondarynamenode
-    ports:
-        - "50090:50090"
-    links:
-        - namenode:hdfs-namenode
+    #datanode:
+    #    image: robingu/spark-docker
+    #    command: hdfs datanode
+    #    ports:
+    ## The host port is randomly assigned by Docker, to allow scaling to multiple DataNodes on the same host
+    #        - "50075:50075"
+    #    links:
+    #        - namenode:hdfs-namenode
+    #
+    #secondarynamenode:
+    #    image: robingu/spark-docker
+    #    command: hdfs secondarynamenode
+    #    ports:
+    #        - "50090:50090"
+    #    links:
+    #        - namenode:hdfs-namenode

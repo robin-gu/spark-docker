@@ -5,15 +5,14 @@ spark-master:
     command: start-master.sh 
     hostname: spark-master
 
-    #datanode:
-    #    image: robingu/spark-docker
-    #    command: hdfs datanode
-    #    ports:
-    ## The host port is randomly assigned by Docker, to allow scaling to multiple DataNodes on the same host
-    #        - "50075:50075"
-    #    links:
-    #        - namenode:hdfs-namenode
-    #
+spark-slave:
+    image: robingu/spark-docker
+    command: start-slave.sh 
+    #ports:
+    #    - "50075:50075"
+    links:
+        - spark-master:spark-master
+
     #secondarynamenode:
     #    image: robingu/spark-docker
     #    command: hdfs secondarynamenode

@@ -20,6 +20,6 @@ RUN update-ca-certificates && \
     mv spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT /opt/spark && \
     mkdir -p /opt/spark/logs
 
-COPY conf/spark-defaults.conf  $SPARK_HOME/spark-defaults.conf
+COPY conf  $SPARK_HOME/conf
 
 CMD ["sh"]

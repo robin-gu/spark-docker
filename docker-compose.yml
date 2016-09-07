@@ -1,12 +1,12 @@
 spark-master:
-    image: robingu/spark-docker
+    image: robingu/spark
     ports: 
         - "8080:8080"
     command: start-master.sh 
     hostname: spark-master
 
 spark-slave:
-    image: robingu/spark-docker
+    image: robingu/spark
     command: start-slave.sh 
     #ports:
     #    - "50075:50075"

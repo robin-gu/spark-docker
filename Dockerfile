@@ -1,6 +1,8 @@
 FROM openjdk:8-jdk-alpine
 
-#Spark
+####################
+# Spark
+####################
 
 ENV SPARK_VERSION	2.0.0
 ENV HADOOP_VERSION_SHORT    2.7

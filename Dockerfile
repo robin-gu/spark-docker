@@ -26,7 +26,7 @@ RUN apk add --update --no-cache openssl ca-certificates bash && \
     tar -zxf /hadoop-$HADOOP_VERSION.tar.gz && \
     rm /hadoop-$HADOOP_VERSION.tar.gz && \
     mkdir -p /opt && \
-    mv hadoop-$HADOOP_VERSION /opt/hadoop && \ 
+    mv hadoop-$HADOOP_VERSION /opt/hadoop && \
     mkdir -p /opt/hadoop/logs
 
 # Overwrite default HADOOP configuration files with our config files
@@ -56,7 +56,7 @@ ADD start-yarn.sh /usr/local/bin/start-yarn.sh
 #    rm /spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT.tgz && \
 #    mv spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION_SHORT /opt/spark && \
 #    mkdir -p /opt/spark/logs
-#
+
 ####################
 # PORTS
 ####################

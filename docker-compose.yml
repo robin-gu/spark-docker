@@ -2,6 +2,7 @@ spark-master:
     image: robingu/spark
     ports: 
         - "8080:8080"
+        - "7077:7077"
     command: start-master.sh && tail -f /opt/spark/logs/*.out
     hostname: spark-master
 

@@ -23,4 +23,6 @@ RUN update-ca-certificates && \
 
 COPY conf  $SPARK_HOME/conf
 
-ENTRYPOINT ["/sbin/tini", "--", "sh"]
+EXPOSE 7077 8080
+
+ENTRYPOINT ["/sbin/tini", "--"]

@@ -10,7 +10,7 @@ ENV SPARK_HOME		/opt/spark
 ENV SPARK_MASTER_HOST 0.0.0.0
 ENV PATH		$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
-RUN apk add --update --no-cache tini
+#RUN apk add --update --no-cache tini
 RUN apk add --update --no-cache openssl openssh ca-certificates bash python py-pip procps
 
 RUN update-ca-certificates && \
@@ -25,4 +25,4 @@ COPY conf  $SPARK_HOME/conf
 
 EXPOSE 7077 8080
 
-ENTRYPOINT ["/sbin/tini", "--"]
+#ENTRYPOINT ["/sbin/tini", "--"]

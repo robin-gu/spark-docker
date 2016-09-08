@@ -7,10 +7,8 @@ FROM openjdk:8-jdk-alpine
 ENV SPARK_VERSION	2.0.0
 ENV HADOOP_VERSION_SHORT    2.7
 ENV SPARK_HOME		/opt/spark
-ENV SPARK_MASTER_HOST 0.0.0.0
 ENV PATH		$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
-#RUN apk add --update --no-cache tini
 RUN apk add --update --no-cache openssl openssh ca-certificates bash python py-pip procps
 
 RUN update-ca-certificates && \
@@ -23,6 +21,6 @@ RUN update-ca-certificates && \
 
 COPY conf  $SPARK_HOME/conf
 
+VOLUME /opt/spark
+WORKDIR $SPARK_HOME
 EXPOSE 7077 8080
-
-#ENTRYPOINT ["/sbin/tini", "--"]

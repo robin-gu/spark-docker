@@ -7,8 +7,8 @@ services:
         - "7077:7077"
     environment:
         SPARK_MASTER_HOST: spark-master 
-    volumes:
-        - logs:/opt/spark/logs
+    #volumes:
+        #- logs:/opt/spark/logs
     command: ["bin/spark-class", "org.apache.spark.deploy.master.Master"]
     hostname: spark-master
 
@@ -16,8 +16,8 @@ services:
     image: robingu/spark
     depends_on:
         - spark-master
-    volumes:
-        - logs:/opt/spark/logs
+    #volumes:
+        #- logs:/opt/spark/logs
     command: ["bin/spark-class", "org.apache.spark.deploy.worker.Worker","spark://spark-master:7077"]
     links:
         - spark-master
